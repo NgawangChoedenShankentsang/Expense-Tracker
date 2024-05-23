@@ -1,7 +1,7 @@
 <template>
   <Header />
   <div class="container">
-    <Balance />
+    <Balance :total="total" />
     <IncomeExpenses />
     <TransactionList :transactions="transactions" />
     <AddTransaction />
@@ -23,6 +23,13 @@
       { text: 'Book', amount: -10 },
       { text: 'Camera', amount: 150 },
   ]);
+
+  //Get Total
+  const total = computed(() => {
+    return transactions.value.reduce((acc, transaction) => {
+      return acc + transaction.amount;
+    }, 0);
+  });
 
   
 </script>
