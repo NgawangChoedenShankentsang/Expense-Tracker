@@ -1,11 +1,24 @@
 <template>
     <h3>History</h3>
       <ul id="list" class="list">
-        <li class="minus">
-          Cash <span>-$400</span><button class="delete-btn">x</button>
+        <li v-for="(transaction, index) in transactions" 
+          :key="index" 
+          :class="transaction.amount < 0 ? 'minus' : 'plus'"
+        >
+          {{transaction.text}}
+            <span>CHF {{transaction.amount}}</span> 
         </li>
-        <li class="Plus">
-          Paycheck <span>$800</span><button class="delete-btn">x</button>
-        </li>
+
       </ul>
 </template>
+
+<script setup>
+  import { defineProps } from 'vue'
+
+  const props = defineProps({
+    transactions: {
+      type: Array,
+      required: true,
+    },
+  });
+</script>
