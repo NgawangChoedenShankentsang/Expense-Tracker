@@ -24,4 +24,10 @@
       required: true,
     },
   });
+  
+  const emit = defineEmits(['delete-transaction']);
+
+  const deleteTransaction = (id) => {
+    emit('delete-transaction', id);
+  };
 </script>

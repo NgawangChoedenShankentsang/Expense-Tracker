@@ -3,7 +3,7 @@
   <div class="container">
     <Balance :total="total" />
     <IncomeExpenses :income="+income" :expenses="+expenses" />
-    <TransactionList :transactions="transactions" />
+    <TransactionList :transactions="transactions" @delete-transaction="deleteTransaction" />
     <AddTransaction @new-transaction="addTransaction" />
   </div>
 </template>
@@ -36,6 +36,22 @@ onMounted(fetchTransactions);
 
 const addTransaction = (transaction) => {
   transactions.value.push(transaction);
+};
+
+const deleteTransaction = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:5000/transactions/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Error deleting transaction');
+    }
+
+    transactions.value = transactions.value.filter(transaction => transaction.id !== id);
+  } catch (error) {
+    console.error('Error deleting transaction:', error);
+  }
 };
 
 const total = computed(() => {
