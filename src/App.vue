@@ -2,53 +2,63 @@
   <Header />
   <div class="container">
     <Balance :total="total" />
-    <IncomeExpenses :income="+income" :expenses="+expenses"/>
+    <IncomeExpenses :income="+income" :expenses="+expenses" />
     <TransactionList :transactions="transactions" />
-    <AddTransaction />
+    <AddTransaction @new-transaction="addTransaction" />
   </div>
 </template>
 
 <script setup>
-  import Header from './components/Header.vue';
-  import Balance from './components/Balance.vue';
-  import IncomeExpenses from './components/IncomeExpenses.vue';
-  import TransactionList from './components/TransactionList.vue';
-  import AddTransaction from './components/AddTransaction.vue';
+import Header from './components/Header.vue';
+import Balance from './components/Balance.vue';
+import IncomeExpenses from './components/IncomeExpenses.vue';
+import TransactionList from './components/TransactionList.vue';
+import AddTransaction from './components/AddTransaction.vue';
 
-  import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
-  const transactions = ref([
-      { text: 'Flower', amount: -20 },
-      { text: 'Salary', amount: 300 },
-      { text: 'Book', amount: -10 },
-      { text: 'Camera', amount: 150 },
-  ]);
+const transactions = ref([]);
 
-  //Get Total
-  const total = computed(() => {
-    return transactions.value.reduce((acc, transaction) => {
-      return acc + transaction.amount;
-    }, 0);
-  });
+const fetchTransactions = async () => {
+  try {
+    const response = await fetch('http://localhost:5000/transactions');
+    if (!response.ok) {
+      throw new Error('Error fetching transactions');
+    }
+    const data = await response.json();
+    transactions.value = data;
+  } catch (error) {
+    console.error('Error fetching transactions:', error);
+  }
+};
 
-  //Get Income
-  const income = computed(() => {
-    return transactions.value
+onMounted(fetchTransactions);
+
+const addTransaction = (transaction) => {
+  transactions.value.push(transaction);
+};
+
+const total = computed(() => {
+  return transactions.value.reduce((acc, transaction) => {
+    return acc + transaction.amount;
+  }, 0);
+});
+
+const income = computed(() => {
+  return transactions.value
     .filter((transaction) => transaction.amount > 0)
     .reduce((acc, transaction) => {
       return acc + transaction.amount;
     }, 0)
     .toFixed(2);
-  });
+});
 
-  //Get Expenses
-  const expenses = computed(() => {
-    return transactions.value
+const expenses = computed(() => {
+  return transactions.value
     .filter((transaction) => transaction.amount < 0)
     .reduce((acc, transaction) => {
       return acc + transaction.amount;
     }, 0)
     .toFixed(2);
-  });
-  
+});
 </script>

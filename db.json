@@ -1,0 +1,14 @@
+{
+  "transactions": [
+    {
+      "id": "1",
+      "text": "Lohn",
+      "amount": 2000
+    },
+    {
+      "id": "ef5d",
+      "text": "coop",
+      "amount": -50
+    }
+  ]
+}
