@@ -1,14 +1,3 @@
 {
-  "transactions": [
-    {
-      "id": "f607",
-      "text": "Lohn",
-      "amount": 2000
-    },
-    {
-      "id": "d16c",
-      "text": "pizza",
-      "amount": -20
-    }
-  ]
+  "transactions": []
 }

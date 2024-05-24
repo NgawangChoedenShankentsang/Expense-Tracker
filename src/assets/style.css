@@ -45,6 +45,7 @@ h4 {
   background-color: #fff;
   box-shadow: var(--box-shadow);
   padding: 20px;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
@@ -73,32 +74,57 @@ h4 {
   color: #c0392b;
 }
 
-label {
-  display: inline-block;
-  margin: 10px 0;
+.form-control {
+  margin-bottom: 20px;
+  width: 100%;
 }
 
-input[type='text'],
-input[type='number'] {
-  border: 1px solid #dedede;
-  border-radius: 2px;
+.form-control label {
   display: block;
-  font-size: 16px;
-  padding: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control input {
   width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-control input:focus {
+  border-color: #6a11cb;
+  outline: none;
+  box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
 }
 
 .btn {
-  cursor: pointer;
-  background-color: #9c88ff;
-  box-shadow: var(--box-shadow);
-  color: #fff;
-  border: 0;
-  display: block;
-  font-size: 16px;
-  margin: 10px 0 30px;
-  padding: 10px;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+  color: white; /* White text color */
+  padding: 15px; 
+  margin: 20px 0 30px;
   width: 100%;
+  border: none; /* No border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for transform and shadow */
+}
+
+.btn:hover {
+  transform: translateY(-2px); /* Slightly lift the button */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.btn:active {
+  transform: translateY(0); /* Reset transform on click */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reset shadow on click */
 }
 
 .btn:focus,
@@ -123,19 +149,54 @@ input[type='number'] {
   margin: 10px 0;
 }
 
-.list li.plus {
-  border-right: 5px solid #2ecc71;
+li.minus {
+  background: rgba(255, 0, 0, 0.2); /* Semi-transparent red background */
+  color: red; /* Red text color */
+  padding: 10px;
+  margin: 5px 0;
+  position: relative; /* Required for pseudo-element positioning */
+  border-radius: 10px; /* Rounded corners */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for better glass effect */
 }
 
-.list li.minus {
-  border-right: 5px solid #c0392b;
+li.minus:hover {
+  transform: scale(1.05); /* Slightly enlarge the item */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Add a deeper shadow on hover */
+}
+
+
+
+li.plus {
+  background: rgba(0, 255, 0, 0.2); /* Semi-transparent green background */
+  color: green; /* Green text color */
+  padding: 10px;
+  margin: 5px 0;
+  position: relative; /* Required for pseudo-element positioning */
+  border-radius: 10px; /* Rounded corners */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for better glass effect */
+}
+
+li.plus:hover {
+  transform: scale(1.05); /* Slightly enlarge the item */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Add a deeper shadow on hover */
 }
 
 .delete-btn {
   cursor: pointer;
-  border: 0;
-  color: #fff;
+  color: red;
+  background: none;
+  border: none;
+  margin-left: 10px;
   font-size: 20px;
+  font-weight: bold;
   line-height: 20px;
   padding: 10px 15px;
   position: absolute;
@@ -144,8 +205,8 @@ input[type='number'] {
   transform: translate(-110%, -50%);
   opacity: 0;
   transition: opacity 0.3s ease;
-  background-color: #e74c3c;
 }
+
 
 .list li:hover .delete-btn {
   opacity: 1;
