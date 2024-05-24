@@ -21,7 +21,7 @@ const transactions = ref([]);
 
 const fetchTransactions = async () => {
   try {
-    const response = await fetch('http://localhost:5000/transactions');
+    const response = await fetch('https://json-server-job4.onrender.com/transactions');
     if (!response.ok) {
       throw new Error('Error fetching transactions');
     }
@@ -40,7 +40,7 @@ const addTransaction = (transaction) => {
 
 const deleteTransaction = async (id) => {
   try {
-    const response = await fetch(`http://localhost:5000/transactions/${id}`, {
+    const response = await fetch(`https://json-server-job4.onrender.com/transactions/${id}`, {
       method: 'DELETE',
     });
 

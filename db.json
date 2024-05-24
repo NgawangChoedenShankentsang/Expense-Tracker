@@ -1,3 +1,14 @@
 {
-  "transactions": []
+  "transactions": [
+    {
+      "id": "c7aa",
+      "text": "salary",
+      "amount": 2000
+    },
+    {
+      "id": "d9c9",
+      "text": "pizza",
+      "amount": -20
+    }
+  ]
 }
